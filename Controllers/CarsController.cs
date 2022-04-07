@@ -5,6 +5,7 @@ using sql_afternoon.Services;
 using sql_afternoon.Models;
 
 namespace sql_afternoon.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
 public class CarsController : ControllerBase
