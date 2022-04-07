@@ -46,6 +46,8 @@ namespace sql_afternoon
             //Transients go here!
             services.AddTransient<CarsRepository>();
             services.AddTransient<CarsService>();
+            services.AddTransient<HousesRepository>();
+            services.AddTransient<HousesService>();
         }
 
         private void ConfigureCors(IServiceCollection services)

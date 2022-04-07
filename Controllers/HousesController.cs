@@ -7,51 +7,53 @@ using sql_afternoon.Models;
 namespace sql_afternoon.Controllers;
 [ApiController]
 [Route("api/[controller]")]
-public class CarsController : ControllerBase
+public class HousesController : ControllerBase
 {
+    private readonly HousesService _hs;
 
-    private readonly CarsService _cs;
-
-    public CarsController(CarsService cs)
+    public HousesController(HousesService hs)
     {
-        _cs = cs;
+        _hs = hs;
     }
 
     [HttpGet]
-    public ActionResult<List<Car>> Get()
+    public ActionResult<List<House>> Get()
     {
         try
         {
-            List<Car> cars = _cs.GetAll();
-            return Ok(cars);
+            List<House> houses = _hs.GetAll();
+            return Ok(houses);
         }
         catch (Exception e)
         {
+
             return BadRequest(e.Message);
         }
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Car> GetById(int id)
+    public ActionResult<House> GetById(int id)
     {
         try
         {
-            Car car = _cs.GetById(id);
-            return Ok(car);
+            House house = _hs.GetById(id);
+            return Ok(house);
+
         }
         catch (Exception e)
         {
+
             return BadRequest(e.Message);
         }
     }
 
     [HttpPost]
-    public ActionResult<Car> Create([FromBody] Car carData)
+    public ActionResult<House> Create([FromBody] House houseData)
     {
         try
         {
-            Car car = _cs.Create(carData);
-            return Created($"api/cars/{car.Id}", car);
+            House house = _hs.Create(houseData);
+            return Created($"api/houses/{house.Id}", house);
         }
         catch (Exception e)
         {
@@ -61,16 +63,17 @@ public class CarsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public ActionResult<Car> Update(int id, [FromBody] Car carData)
+    public ActionResult<House> Update(int id, [FromBody] House houseData)
     {
         try
         {
-            carData.Id = id;
-            Car updated = _cs.Update(carData);
+            houseData.Id = id;
+            House updated = _hs.Update(houseData);
             return Ok(updated);
         }
         catch (Exception e)
         {
+
             return BadRequest(e.Message);
         }
     }
@@ -80,16 +83,15 @@ public class CarsController : ControllerBase
     {
         try
         {
-            _cs.Delete(id);
-            return Ok("Delorted");
+            _hs.Delete(id);
+            return Ok("Deleted House");
         }
         catch (Exception e)
         {
+
             return BadRequest(e.Message);
         }
     }
-
-
 
 
 }
